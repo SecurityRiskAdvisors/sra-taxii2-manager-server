@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "express-validator": "^5.1.2",
+    "http-errors": "~1.6.2",
+    "mongoose": "^5.0.16",
+    "mongoose-hidden": "^1.5.3",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "uuid": "^3.2.1"
+  }
+}

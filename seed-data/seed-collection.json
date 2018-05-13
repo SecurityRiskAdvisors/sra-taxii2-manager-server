@@ -1,0 +1,10 @@
+[
+    {
+        "id" : "9ee8a9b3-da1b-45d1-9cf6-8141f7039f82",
+        "title" : "enterprise-attack",
+        "description" : "STIX 2.0 ATT&CK content from https://github.com/mitre/cti/tree/master/enterprise-attack",
+        "media_types" : [ 
+            "application/vnd.oasis.stix+json; version=2.0"
+        ]
+    }
+]

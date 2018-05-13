@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Admin",
+        "readAll": true,
+        "writeAll": true,
+        "system": true
+    },
+    {
+        "name": "Global API (read/write)",
+        "readAll": true,
+        "writeAll": true,
+        "system": true
+    },
+    {
+        "name": "Global Consumer (read only)",
+        "readAll": true,
+        "writeAll": false,
+        "system": true
+    },
+    {
+        "name": "Global Producer (write only)",
+        "readAll": false,
+        "writeAll": true,
+        "system": true
+    }
+]

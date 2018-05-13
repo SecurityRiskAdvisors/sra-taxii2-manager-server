@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@example.com",
+        "password": "$2a$12$LNkDcUSRi4JpZInhqcLlNOjTqnAfXZmPdrt5qYXhZYGxVNKzocARK",
+        "active": true,
+        "system": true
+    }
+]
