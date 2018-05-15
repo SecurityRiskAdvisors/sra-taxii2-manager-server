@@ -10,7 +10,6 @@ const baseLogin = async (req, res, next) => {
             password = req.body.password;
             
         let accountResult = await Account.findOne({email: email}).populate('role');
-        console.log(accountResult);
 
         // @TODO - @GFTODO - testing speed of auth
         if(await bcrypt.compare(password, accountResult.password) && accountResult.active && accountResult.role) {

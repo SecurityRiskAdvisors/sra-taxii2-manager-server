@@ -9,7 +9,8 @@ const
     https = require('https'),
     // new stuff
     logger = require('morgan'),
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+    seedTaxiiData = require('./seed-taxii-data');
 
 module.exports = function() {
   let server = express(),
@@ -31,17 +32,19 @@ module.exports = function() {
       server.set('sslOptions', {
           key: fs.readFileSync(sslCertDir + '/key.pem'),
           cert: fs.readFileSync(sslCertDir + '/cert.pem'),
-          passphrase: 'PUT_YOUR_PASSPHRASE_HERE_OR_CHANGE_TO_GET_THIS_FROM_SOMEWHERE_ELSE'
+          passphrase: 'testpw'
       });
 
       mongoose.connect(config.connectionString + config.confDb);
 
       // @TODO - remove debugging
-      mongoose.set('debug', function (collectionName, method, query, doc) {
+      /*mongoose.set('debug', function (collectionName, method, query, doc) {
           console.log("colName: ", collectionName);
           console.log("query: ", query);
           console.log("method: ", method);
-      });
+      });*/
+
+      seedTaxiiData();
         
       server.use(cookieParser());
       server.use(express.json());

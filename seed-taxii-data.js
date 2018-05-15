@@ -8,16 +8,13 @@ const
     Account = require('./models/account'),
     fs = require('fs'),
     util = require('util');
+
+const readFile = util.promisify(fs.readFile);
  
 // @TODO - need to make sure seeding only happens if taxii2config db doesn't exist
 
-const readFile = util.promisify(fs.readFile);
-let seedDb = async function() {
-    let db = await mongoose.connect(config.connectionString + config.confDb,
-        {
-            reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-            reconnectInterval: 4000, // Reconnect every 4 seconds
-        });
+const seedTaxiiData = async () => {
+
     let seedDir =  __dirname + '/seed-data/';
 
     let basicJsonInsert = async function(fileName, BaseModel, additionalFields = null) {
@@ -61,43 +58,43 @@ let seedDb = async function() {
         }    
     }
 
-    // Execute imports here
+    let foundSeedData = false;
     try {
-        console.log("Seeding API Root... ");
-        await basicJsonInsert('seed-apiroot1.json', ApiRoot);
-
-        let insertedApiRoot = await ApiRoot.findOne({name: "apiroot1"}).select('_id name');
-        let insertedApiRootId = { apiRoot : insertedApiRoot._id };
-        let insertedApiRootName = insertedApiRoot.name;
-        console.log("Seeding Collection... ");
-        await basicJsonInsert('seed-collection.json', Collection, insertedApiRootId);
-
-        console.log("Seeding Roles... ");
-        await basicJsonInsert('seed-roles.json', Role);
-
-        console.log("Seeding Admin Account... ");
-        let insertedAdminRole = await Role.findOne({name: "Admin"});
-        let insertedAdminRoleId = { role: insertedAdminRole._id };
-        await basicJsonInsert('seed-admin-account.json', Account, insertedAdminRoleId);
-
-        await importEnterpriseAttack(insertedApiRootName, '9ee8a9b3-da1b-45d1-9cf6-8141f7039f82');
+        let seededAdminRole = await Role.findOne({name: "Admin"});
+        if(seededAdminRole._id) {
+            foundSeedData = true
+        }
+    } catch(err) {
+        console.log("No seeded admin role data found, seeding all data.");
     }
-    catch(err) {
-        console.log("Error: ", err);
+
+    // Execute imports here
+    if(!foundSeedData)
+    {
+        try {
+            console.log("Seeding API Root... ");
+            await basicJsonInsert('seed-apiroot1.json', ApiRoot);
+
+            let insertedApiRoot = await ApiRoot.findOne({name: "apiroot1"}).select('_id name');
+            let insertedApiRootId = { apiRoot : insertedApiRoot._id };
+            let insertedApiRootName = insertedApiRoot.name;
+            console.log("Seeding Collection... ");
+            await basicJsonInsert('seed-collection.json', Collection, insertedApiRootId);
+
+            console.log("Seeding Roles... ");
+            await basicJsonInsert('seed-roles.json', Role);
+
+            console.log("Seeding Admin Account... ");
+            let insertedAdminRole = await Role.findOne({name: "Admin"});
+            let insertedAdminRoleId = { role: insertedAdminRole._id };
+            await basicJsonInsert('seed-admin-account.json', Account, insertedAdminRoleId);
+
+            await importEnterpriseAttack(insertedApiRootName, '9ee8a9b3-da1b-45d1-9cf6-8141f7039f82');
+        }
+        catch(err) {
+            console.log("Error: ", err);
+        }
     }
 }
 
-seedDb().then(() => {
-    mongoose.connection.close().then(() => {
-        console.log("DB connection closed.")
-        process.exit();
-    });
-});
-
-
-/*
-
-db.accounts.insertOne(
-
-)
-*/
+module.exports = seedTaxiiData;
