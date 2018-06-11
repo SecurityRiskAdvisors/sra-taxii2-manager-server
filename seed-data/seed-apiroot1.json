@@ -1,5 +1,7 @@
 [
     { 
-        "name": "apiroot1"
+        "name": "apiroot1",
+        "description":"enterprise-attack and testing",
+        "default":true
     }
 ]

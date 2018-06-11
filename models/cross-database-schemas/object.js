@@ -2,9 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
 
-// @TODO - this code is literally cut and pasted for use in the CLI import tool, need to figure out something better
-// npm module maybe
-
 const objectSchema = new Schema({ 
     any: {} 
 }, { 
@@ -13,6 +10,7 @@ const objectSchema = new Schema({
     strict: false
 });
 
+objectSchema.index({id: 1, created: 1}, {unique: true});
 objectSchema.plugin(mongoosePaginate);
 
 module.exports = objectSchema;

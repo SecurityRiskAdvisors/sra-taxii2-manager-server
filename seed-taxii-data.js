@@ -48,6 +48,7 @@ const seedTaxiiData = async () => {
             let importJson = JSON.parse(importData);
             //console.log('Import Data Example: ', importJson[1]);
             let models = ModelFactory(apiRootName, collectionId);
+
             console.log("Seeding Enterprise Attack Collection to API root: ", apiRootName, " collection: ", collectionId);
             console.log(" ... from: ", file);
             

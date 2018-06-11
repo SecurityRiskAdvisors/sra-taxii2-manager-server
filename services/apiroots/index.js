@@ -7,7 +7,6 @@ const config = require('../../configs');
 const getApiRoots = async (req, res, next) => {
     try {
         let apiRootsResult = await ApiRoot.find({}).select('_id name baseUrl createdAt');
-        console.log(apiRootsResult);
 
         res.data = apiRootsResult;
         next();
@@ -22,7 +21,6 @@ const getApiRoots = async (req, res, next) => {
 const getApiRootByName = async (req, res, next) => {
     try {
         let apiRootsResult = await ApiRoot.find({}).select('_id name baseUrl createdAt');
-        console.log(apiRootsResult);
 
         res.data = apiRootsResult;
         next();

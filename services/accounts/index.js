@@ -15,7 +15,6 @@ const mockResponse = [{
 const getAccounts = async (req, res, next) => {
     try {
         let accountsResult = await Account.find({}).select('_id name email role createdAt');
-        console.log(accountsResult);
 
         res.data = accountsResult;
         next();
