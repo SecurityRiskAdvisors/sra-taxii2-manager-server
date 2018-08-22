@@ -20,7 +20,7 @@ const getApiRoots = async (req, res, next) => {
 // @TODO - @GFTODO - complete this
 const getApiRootByName = async (req, res, next) => {
     try {
-        let apiRootsResult = await ApiRoot.find({}).select('_id name baseUrl createdAt');
+        let apiRootsResult = await ApiRoot.find({name: req.params.name}).select('_id name baseUrl createdAt');
 
         res.data = apiRootsResult;
         next();
@@ -71,5 +71,6 @@ const createApiRoot = [
 
 module.exports = {
     getApiRoots: getApiRoots,
+    getApiRootByName: getApiRootByName,
     createApiRoot: createApiRoot
 };

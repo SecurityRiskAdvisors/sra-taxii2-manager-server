@@ -8,6 +8,7 @@ const
 let router = express.Router();
 
 router.get('/', apiRootsService.getApiRoots, renderJson);
+router.get('/:name', apiRootsService.getApiRootByName, renderJson);
 router.post('/', apiRootsService.createApiRoot);
 
 module.exports = router;

@@ -10,11 +10,13 @@ const
     // new stuff
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
-    seedTaxiiData = require('./seed-taxii-data');
+    seedTaxiiData = require('./seed-taxii-data'),
+    sharedFolderWatcher = require('./utils/shared-folder-watcher');
 
 module.exports = function() {
   let server = express(),
       create,
+      watcher,
       start;
 
   create = function(config) { 
@@ -50,7 +52,7 @@ module.exports = function() {
       server.use(express.json());
       server.use(express.urlencoded({ extended: false }));
 
-      server.use(logger('dev'))
+      server.use(logger('dev'));
 
       // @TODO this definitely needs fixing, do not * for CORS
       server.use(function(req, res, next) {
@@ -77,8 +79,15 @@ module.exports = function() {
       });
   };
 
+  watcher = function() {
+    sharedFolderWatcher(server).then(() => {
+        console.log("shared folder watcher loaded");
+    });
+  }
+
   return {
       create: create,
-      start: start
+      start: start,
+      watcher: watcher
   };
 };

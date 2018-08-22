@@ -8,5 +8,7 @@ const
 let router = express.Router();
 
 router.get('/', collectionsService.getCollections, renderJson);
+router.get('/:title', collectionsService.getCollectionByTitle, renderJson);
+router.post('/', collectionsService.createCollection);
 
 module.exports = router;

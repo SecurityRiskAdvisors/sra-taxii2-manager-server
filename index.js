@@ -5,4 +5,5 @@ const
     config = require('./configs');
 
 server.create(config);
+server.watcher();
 server.start();  
