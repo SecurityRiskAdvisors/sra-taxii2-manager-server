@@ -93,6 +93,11 @@ const sharedFolderWatcher = async (server) => {
         const fileName = path.basename(fEventPath);
         const filePath = path.dirname(fEventPath);
 
+        if(filePath == process.env.FILE_TEMP_DIR) {
+            console.log("Ignoring file, uploaded by server?");
+            return false;
+        }
+
         const collectionName = filePath.replace(process.env.FILE_TEMP_DIR + path.sep, '');
         if(collectionName.match(new RegExp('\/' + path.sep))) {
             console.log("NOT IMPLEMENTED ERROR: too many nested dirs");
