@@ -32,9 +32,9 @@ module.exports = function() {
 
       let sslCertDir = config.certDir.replace(/^(.+?)\/*?$/, "$1");
       server.set('sslOptions', {
-        key: fs.readFileSync(sslCertDir + '/taxii-manager-key.pem'),
-        cert: fs.readFileSync(sslCertDir + '/taxii-manager-crt.pem'),
-        ca: fs.readFileSync(sslCertDir + '/ca-crt.pem'), 
+        key: fs.readFileSync(sslCertDir + '/taxii-manager.key'),
+        cert: fs.readFileSync(sslCertDir + '/taxii-manager.crt'),
+        ca: fs.readFileSync(sslCertDir + '/taxiiRootCA.pem'), 
       });
 
       mongoose.connect(config.connectionString + config.confDb);
