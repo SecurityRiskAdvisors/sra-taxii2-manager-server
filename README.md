@@ -8,5 +8,3 @@ This is a TAXII2 server manager for sra-taxii2-server, provides initial auth man
 **Expects .env file containing FILE_TEMP_DIR in base, created with install script from sra-taxii2-server.  Also uses certs and shares data with server project**
 
 
-**UI PREVIEW:**
-![UI Preview Graphic](sraTaxiiManagerUIPreview.jpg)
