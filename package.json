@@ -15,7 +15,7 @@
     "express": "~4.16.0",
     "express-validator": "^5.1.2",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.4.11",
+    "mongoose": "^5.7.5",
     "mongoose-hidden": "^1.6.0",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.1",
