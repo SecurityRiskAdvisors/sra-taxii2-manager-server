@@ -6,7 +6,7 @@
     "start": "nodemon index.js"
   },
   "dependencies": {
-    "bcrypt": "^2.0.1",
+    "bcrypt": "^5.0.0",
     "bull": "^3.4.7",
     "chokidar": "^2.0.4",
     "cookie-parser": "~1.4.3",
